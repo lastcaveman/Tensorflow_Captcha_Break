@@ -41,14 +41,18 @@ def get_train_captcha():
 	return captcha_text, captcha_image
 
 def get_test_captcha():
-	files = os.listdir('./captcha/train')
+	files = os.listdir('./captcha/test')
 	num=len(files)
 	rand = random.randint(0 , num-1)
 	file_name = files[rand]
 	captcha_text = file_name.replace('.jpg','')
-	captcha_image = Image.open('./captcha/train/'+file_name) #转换为图片格式
+	captcha_image = Image.open('./captcha/test/'+file_name) #转换为图片格式
 	captcha_image = np.array(captcha_image) #转换为 np数组类型
-	return captcha_text, captcha_image
+	if captcha_image.shape == (64, 168, 3):
+		return captcha_text, captcha_image
+	else:
+		return get_test_captcha()
+	# return captcha_text, captcha_image
 
 if __name__ == '__main__':
 	# 测试
