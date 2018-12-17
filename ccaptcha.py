@@ -22,10 +22,8 @@ def random_captcha_text(char_set=number+alphabet+ALPHABET, captcha_size=4):
 def gen_captcha():
 	'''生成字符对应的验证码 '''
 	image = ImageCaptcha() #导入验证码包 生成一张空白图
-
 	captcha_text = random_captcha_text() # 随机一个验证码内容
 	captcha_text = ''.join(captcha_text) # 类型转换为字符串
-
 	captcha = image.generate(captcha_text)
 	image.write(captcha_text, './captcha/train/'+ captcha_text + '.jpg')  # 写到文件
 	return 
